@@ -9,6 +9,7 @@ djangorestframework-simplejwt = "*"
 djangorestframework = "*"
 pandas = "*"
 psycopg2-binary = "*"
+sqlalchemy = "*"
 
 [dev-packages]
 

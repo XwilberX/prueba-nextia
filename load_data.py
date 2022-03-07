@@ -1,18 +1,13 @@
 import psycopg2
 import pandas as pd
+import sqlalchemy
 
-settingsdb = {
-    'host': 'localhost',
-    'port': '5432',
-    'database': 'nextia-test',
-    'user': 'postgres',
-    'password': 'postgres'
-}
+df = pd.read_csv('data.csv')
 
-def connect_db():
-    try:
-        conn = psycopg2.connect(**settingsdb)
-        return conn
-    except:
-        print("No puedo conectarme a la base de datos. ")
+engine = sqlalchemy.create_engine('postgresql+psycopg2://postgres:postgres@localhost:5432/nextia-test')
+con = engine.connect()
 
+print(engine.table_names())
+
+table_name = 'app_bienesmodel'
+df.to_sql(table_name, con, if_exists='replace', index=False)
