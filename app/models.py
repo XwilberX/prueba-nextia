@@ -10,8 +10,8 @@ class BaseModel(models.Model):
         abstract = True
 
 class UserModel(BaseModel):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(max_length=100)
+    fullname = models.CharField(max_length=255)
+    user = models.CharField(max_length=255)
     password = models.CharField(max_length=100)
 
     def __str__(self):
@@ -21,3 +21,4 @@ class BienesModel(BaseModel):
     article = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
+
