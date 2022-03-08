@@ -72,6 +72,7 @@ def register(request):
     return response
 
 class ListUserView(APIView):
+    queryset = UserModel.objects.all()
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
