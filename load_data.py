@@ -1,24 +1,23 @@
 import psycopg2
 import pandas as pd
-from sqlalchemy import create_engine
+import datetime as dt
 
 settingsdb = {
     'host': 'localhost',
     'port': '5432',
     'database': 'nextia-test',
     'user': 'postgres',
-    'password': 'postgres'
+    'password': 'wil99'
 }
-
-engine = create_engine('postgresql://{user}:{password}@{host}:{port}/{database}'.format(**settingsdb))
 
 df = pd.read_csv('data.csv')
 
-try:
-    df.to_sql('app_bienesmodel', engine, if_exists='replace', index=False)
-except:
-    print('Error')
-finally:
-    engine.dispose()
+conn = psycopg2.connect(**settingsdb)
+cursor = conn.cursor()
 
+for index, row in df.iterrows():
+    cursor.execute(f"INSERT INTO app_bienesmodel (id, created_at, updated_at, article, description, id_user_id) VALUES ({row['id']}, '{dt.datetime.now()}', '{dt.datetime.now()}', '{row['articulo']}', '{row['descripcion']}', {row['id_user_id']})")
+    conn.commit()
 
+cursor.close()
+conn.close()

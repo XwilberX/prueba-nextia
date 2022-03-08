@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.permissions.AllowAny',
     ],
 }
 
@@ -88,7 +89,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'nextia-test',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'PASSWORD': 'wil99',
         'HOST': 'localhost',
         'PORT': '',
     }
